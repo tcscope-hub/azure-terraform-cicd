@@ -19,6 +19,3 @@ jobs:
       - run: terraform init
       - run: terraform validate
       - run: terraform plan -no-color
-
-      - if: github.event_name == 'push'
-        run: terraform apply -auto-approve -no-color

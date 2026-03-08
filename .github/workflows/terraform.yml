@@ -1,0 +1,24 @@
+name: Terraform CI/CD Azure (Terraform Cloud)
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    env:
+      TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_app_terraform_io }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+
+      - run: terraform fmt -check -recursive
+      - run: terraform init
+      - run: terraform validate
+      - run: terraform plan -no-color
+
+      - if: github.event_name == 'push'
+        run: terraform apply -auto-approve -no-color

@@ -72,7 +72,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   name                = "${var.prefix}-vm"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  size                = "Standard_DS1_v2"
+  size                = "Standard_B2s"
   admin_username      = var.vm_admin_username
 
   network_interface_ids = [azurerm_network_interface.nic.id]
@@ -110,8 +110,8 @@ resource "azurerm_container_group" "aci" {
   os_type             = "Linux"
 
   container {
-    name   = "nginx"
-    image  = "nginx:alpine"
+    name   = "microsoft"
+    image  = "mcr.microsoft.com/azuredocs/aci-helloworld:latest"
     cpu    = "0.5"
     memory = "1.0"
 

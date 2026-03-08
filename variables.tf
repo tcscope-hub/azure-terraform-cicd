@@ -5,7 +5,7 @@ variable "location" {
 
 variable "prefix" {
   type    = string
-  default = "cicd-demo"
+  default = "cicd"
 }
 
 variable "vm_admin_username" {
